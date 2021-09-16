@@ -1,17 +1,17 @@
 Fase 1 - Configurando, testando e interagindo com o banco:
     ✔ Rodar o script ./database/contatos.sql @done(21-09-15 19:56)
     ✔ Instalar Sequelize, mysql2, sequelize-cli (dev only) @done(21-09-15 20:10)
-    ☐ Construir arquivo de configurações de .sequelizerc
-    ☐ sequelize init:
-        - Rodar npx sequelize init
-        - Acrescentar o config.json ao .gitignore
+    ✔ Construir arquivo de configurações de .sequelizerc @done(21-09-15 21:49)
+    ✔ sequelize init: @done(21-09-15 21:49)
+        ✔ Rodar npx sequelize init @done(21-09-15 21:49)
+        ✔ Acrescentar o config.json ao .gitignore @done(21-09-15 21:50)
         - Acrescentar o config.example.json como cópia do config.json
         - Acrescentar o .gitkeep nas pastas migrations e seeders
-        - Adeque o config.json para sua máquina local
-    ☐ Crie um arquivo testedb.js para testar a conexão com o banco de dados.
-        - Ele deve importar Sequelize de sequelize
-        - importar as configurações da conexão com o banco que estão em config.json
-        - Criar uma conexão
-        - Testar a conexão!
+        ✔ Adeque o config.json para sua máquina local @done(21-09-15 21:53)
+    ✔ Crie um arquivo testedb.js para testar a conexão com o banco de dados. @done(21-09-15 21:53)
+        ✔ Ele deve importar Sequelize de sequelize @done(21-09-15 21:53)
+        ✔ importar as configurações da conexão com o banco que estão em config.json @done(21-09-15 21:53)
+        ✔ Criar uma conexão @done(21-09-15 21:53)
+        ✔ Testar a conexão! @done(21-09-15 21:53)
     ☐ Fazer com que AuthController.registrar acrescente um usuário na tabela de usuários e retorne ok.
     ☐ Fazer com que AuthController.login verifique se usuário existe com login e senhas recebidos.
