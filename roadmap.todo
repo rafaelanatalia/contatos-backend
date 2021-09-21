@@ -13,10 +13,10 @@ Fase 1 - Configurando, testando e interagindo com o banco:
         ✔ importar as configurações da conexão com o banco que estão em config.json @done(21-09-15 21:53)
         ✔ Criar uma conexão @done(21-09-15 21:53)
         ✔ Testar a conexão! @done(21-09-15 21:53)
-    ☐ Fazer com que AuthController.registrar acrescente um usuário na tabela de usuários e retorne ok.
-    ☐ Fazer com que AuthController.login verifique se usuário existe com login e senhas recebidos.
-    ☐ Criar o model de usuários
-    ☐ Refatorar AuthController.registrar e AuthController.login para que ela utilize o model Usuário
+    ✘ Refatorar AuthController.registrar e AuthController.login para que ela utilize o model Usuário @cancelled(21-09-20 19:57)
+    ✔ Criar o model de usuários @done(21-09-20 21:12)
     ☐ Criar model para telefone
     ☐ Criar model para contato
+    ☐ Fazer com que AuthController.registrar acrescente um usuário na tabela de usuários e retorne ok.
+    ☐ Fazer com que AuthController.login verifique se usuário existe com login e senhas recebidos.
     
