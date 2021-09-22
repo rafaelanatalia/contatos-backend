@@ -13,6 +13,13 @@ module.exports = (sequelize, DataTypes) =>{
         }
     );
 
+    u.associate = (models) => {
+
+        // Associando usuário com contatos (um usuário possui muitos contatos);
+        u.hasMany(models.Contato, {as:'contatos', foreignKey:'usuarios_id'});
+
+    }
+
     return u;
 
 }
