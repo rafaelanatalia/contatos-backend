@@ -7,10 +7,14 @@ module.exports = {
         // {"nome":"XXX", "email":"XXX@XXX", "senha":"123456"}
        
         let {nome, email, senha} = req.body;
-        let novoUsuario = await Usuario.create({nome, email, senha:bcrypt.hashSync(senha, 10)});
-        delete novoUsuario.senha;
 
-        return res.json(novoUsuario);
+        try {
+            let novoUsuario = await Usuario.create({nome, email, senha:bcrypt.hashSync(senha, 10)});
+            return res.status(201).json(novoUsuario);
+        } catch (error) {
+            return res.status(409).json({error: 1, msg:"Usuário já cadastrado com este email."});
+        }
+
     },
     login: (req, res) => {
         console.log('logando...');
