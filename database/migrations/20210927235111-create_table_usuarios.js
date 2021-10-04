@@ -7,7 +7,11 @@ module.exports = {
       {
         id: {type: Sequelize.DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
         nome: {type: Sequelize.DataTypes.STRING(45), allowNull: false},
-        email: {type: Sequelize.DataTypes.STRING(45), allowNull: false},
+        email: {
+          type: Sequelize.DataTypes.STRING(45),
+          allowNull: false,
+          unique: true
+        },
         senha: Sequelize.DataTypes.STRING(256)
       }
     )
