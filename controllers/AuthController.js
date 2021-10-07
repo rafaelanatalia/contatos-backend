@@ -1,5 +1,6 @@
 const {Usuario} = require('../database/models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     registrar: async (req, res)=>{
@@ -38,7 +39,13 @@ module.exports = {
             return res.status(403).json({erro:1, msg:"Acesso negado"});
         }
 
+        // Removendo informação sensível do usuário
+        usuario.senha = undefined;
+        
+        // Gerando o token com os dados do usuário e com uma senha
+        let token = jwt.sign(usuario.toJSON(),"jacarenosecoanda");
+
         // Se a senha for ok, retornar msg sucesso (por enquanto...)
-        res.status(200).json({msg:"We're the champions, my frieends!!!"});
+        res.status(200).json({msg:"ok", token});
     }
 }

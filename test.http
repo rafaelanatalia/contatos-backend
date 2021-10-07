@@ -18,7 +18,25 @@ Host: {{host}}
 Content-Type: {{contentType}}
 
 {
-    "name": "iago",
+    "nome": "iago",
     "email": "iago@gmail.com",
     "senha": "123456"
 }
+
+###
+
+POST /login HTTP/1.1
+Host: {{host}}
+Content-Type: {{contentType}}
+
+{
+    "email":"iago@digitalhouse.com",
+    "senha":"123456"
+}
+
+###
+
+GET /contatos HTTP/1.1
+Host: {{host}}
+Content-Type: {{contentType}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwibm9tZSI6IklhZ28gTnVuZXMiLCJlbWFpbCI6ImlhZ29AZGlnaXRhbGhvdXNlLmNvbSIsImlhdCI6MTYzMzU2MzEzNn0.mrm3uvtI1WYkH4apEbNNZRDOWiO_8WxypGB3wtkvTT0
