@@ -38,7 +38,7 @@ module.exports = {
             // Se a senha for inválida, retornar erro.
             return res.status(403).json({erro:1, msg:"Acesso negado"});
         }
-
+        
         // Removendo informação sensível do usuário
         usuario.senha = undefined;
         
