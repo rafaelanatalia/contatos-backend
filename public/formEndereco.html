@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form>
+
+        <div>lalala</div>
+        <label>
+            Cep:
+            <input type="text" name="cep" id="cep" placeholder="CEP"><br>
+        </label>
+        <input type="text" id="cidade" placeholder="Cidade"><br>
+        <input type="text" id="estado" placeholder="Estado"><br>
+        <input type="text" id="bairro" placeholder="Bairro"><br>
+        
+    </form>
+
+    <script>
+
+        const input = document.getElementById('cep');
+        const form = document.querySelector('form');
+
+        console.log(form.elements);
+
+        input.addEventListener(
+            'blur',
+            async evt => {
+                let cep = input.value;
+                let url = `https://viacep.com.br/ws/${cep}/json/`;
+                let resposta = await fetch(url);
+                let endereco = await resposta.json();
+                console.log(endereco)
+            }
+        )
+
+    </script>
+</body>
+</html>

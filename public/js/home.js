@@ -1,108 +1,112 @@
-// Simulando os contatos em uma variável
-let contatos = [
-    {
-        "id":1,
-        "nome":"Kakashi Hatake",
-        "emails":["kakashi@anbu.com"],
-        "telefones":["99999-1111","98888-1234"]
-    },
-    {
-        "id":2,
-        "nome":"Sakura Haruno",
-        "emails":["sakura@konoha.com"],
-        "telefones":["99999-2222","98888-3333"]
-    },
-    {
-        "id":3,
-        "nome":"Hinata Hyuga",
-        "emails":["Hinata@hyugas.com"],
-        "telefones":["99999-3333","98888-4444"]
-    },
-    {
-        "id":4,
-        "nome":"Vovó Tsunade",
-        "emails":["tsunade@hokages.com"],
-        "telefones":["99999-4444","98888-5555"]
-    },
-    {
-        "id":5,
-        "nome":"Shikamaru Nara",
-        "emails":["shikamaru@konoha.com"],
-        "telefones":["99999-5555","98888-6666"]
-    },
-    {
-        "id":6,
-        "nome":"Ino",
-        "emails":["ino@yamanakas.com"],
-        "telefones":["99999-6666","98888-7777"]
-    },
-    {
-        "id":7,
-        "nome":"Choji Akimichi",
-        "emails":["choji@akimichis.com"],
-        "telefones":["99999-7777","98888-8888"]
-    }
-]
+const loginContainer = document.getElementById("login-container");
+const appContainer = document.getElementById("app-container");
+const formLogin = document.querySelector('#login-container > form');
+const emailLogin = document.querySelector('#email');
+const senhaLogin = document.querySelector('#senha');
+const main = document.querySelector('main');
+const modal = document.getElementById("modal");
+const link = document.getElementById("linkAbrirModal");
+const edits = document.querySelectorAll("section > a");
+const search = document.getElementById('search');
+const cancelButton = document.querySelector('#modal button.link');
+const inputParaFocus = document.querySelector('#modal input[name="nome"]')
 
-console.log(contatos);
+const mostrarModal = () => {
+    modal.style.display = "flex";
+    modal.style.opacity = 1;
+    inputParaFocus.focus()
+};
 
+const esconderModal = (e) => {
+    e.bubbles = false;
+    modal.style.display = "none"
+    modal.style.opacity = 0;
+};
 
-//função que mostra todos os contatos
+const showContatos = contatos => {
+    main.innerHTML = '';
+    contatos.forEach(c => {
+        const section = document.createElement('section');
 
-let showContatos=(contatos)=>{
+        let htmlEmails = '';
+        c.emails.forEach(e => {
+            htmlEmails += `<a href="mailto:${e}">${e}</a>`;
+        });
 
-    // fazer um for percorrendo esse contatos
-    contatos.forEach(
-        c=>{
-            // criar um elemento section
-           let section= document.createElement('section');
-            
-           // criar o cod html dos emails
-            let htmlDosEmails='';
-            c.emails.forEach(
-                e=>{ htmlDosEmails +=`<a href"mailto:${e}">${e}</a>`}
-            )
-            let tel='';
-            c.telefones.forEach(
-                t=>{tel+=`
-                <li><a href="tel:${t}">${t}</a></li>`}
-            )
-            //  criar o codigo html que será conteudo da section
-        let html=`
+        let htmlTels = '';
+        c.telefones.forEach(t => {
+            htmlTels += `<li><a href="tel:${t}">${t}</a></li>`;
+        });
+
+        const html = `
             <h3>${c.nome}</h3>
             <div>
-                ${htmlDosEmails}
+                ${htmlEmails}
             </div>
             <ul>
-               ${tel}
+                ${htmlTels}
             </ul>
             <a href="#">Editar</a>
-            `;
+        `;
 
-            // add o codigo html ao elemento section
-            section.innerHTML=html;
+        section.innerHTML = html;
 
-            // adicionando a section do contato no main 
-                //  capturar a main (querySelector) 
-         let main= document.querySelector('main')
+        main.appendChild(section);
+    });
+};
 
-            // add ao section ao main 
-            main.appendChild(section)
-                
+const buscaContatos = trecho => {
+    const contatosFiltrados = contatos.filter(
+        c => c.nome.toUpperCase().includes(trecho.toUpperCase())
+    );
+
+    showContatos(contatosFiltrados);
+};
+
+const carregaContatos =  async ()=> {
+
+    let resposta = await fetch('/contatos');
+    let contatos = await resposta.json();
+    showContatos(contatos);
+
+}
+
+const login = async dadosDeLogin =>{
+    
+    let response = await fetch(
+        '/login',
+        {
+            method:"POST",
+            body: JSON.stringify(dadosDeLogin),
+            headers: {
+                "content-type":"application/json"
+            }
         }
-    )
-}
-
-let buscaContatos=(trecho)=>{
-// filtrar os contatos somente os que póssuem 
-// o trecho no nome
-let contatosFiltrados= contatos.filter(
-    c=>c.nome.includes(trecho)
-)
-
-// mostrar os conatos filtrados
-showContatos(contatosFiltrados);
-
+    );
+    let resultado = await response.json();
+    console.log(dadosDeLogin)
+    console(resultado);
 
 }
-showContatos(contatos);
+
+search.addEventListener('keyup', (e) => buscaContatos(e.target.value));
+link.addEventListener('click', mostrarModal);
+cancelButton.addEventListener('click', esconderModal);
+modal.addEventListener('keyup', e => e.key === 'Escape' ? esconderModal(e) : null);
+formLogin.addEventListener(
+    'submit',
+    e => {
+        // Interromper o comportamento padrão do evento;
+        e.preventDefault();
+        
+        // Ler os dados de login
+        let dadosDeLogin = {
+            email: emailLogin.value,
+            senha: senhaLogin.value
+        }
+
+        // Chamar uma função para fazer o login
+        login(dadosDeLogin);
+
+    }
+);

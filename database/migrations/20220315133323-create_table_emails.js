@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.createTable(
@@ -19,12 +20,13 @@ module.exports = {
             },
             key:'id'
           },
-          onDelete:'cascade',
+          onDelete: 'cascade',
           onUpdate: 'cascade'
         }
       }
     )
   },
+
   async down (queryInterface, Sequelize) {
     return  queryInterface.dropTable('emails');
   }

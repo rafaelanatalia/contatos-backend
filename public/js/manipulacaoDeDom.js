@@ -56,3 +56,4 @@ campoSenha.value = "123456";
 
 // Fazer com que a opção portugal seja selecionada
 // aqui pelo javascript!
+
